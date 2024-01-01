@@ -14,8 +14,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
+var url = window.location.href;
+url = url.replace(`https://`, ``);
+var path = url.split("?");
+var id = decodeURIComponent(path[1]);
+
 const content = document.documentElement.outerHTML;
-set(ref(db, 'page/' + "page-001"), {
-    content: content
+set(ref(db, `${path}/${id}`), {
+    content: content,
+    answer: null
 })
 alert('Saved');
